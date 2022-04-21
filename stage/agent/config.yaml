@@ -1,0 +1,9 @@
+addr: ws://localhost:8080/ws
+user: paulo
+apikey: AA1234
+cmds:
+  a: ["@open", "https://www.google.com/search?q=${P0}"]
+  b: ["ls", "-larth"]
+
+title: Agent (TITLE)
+icon: icon.png
