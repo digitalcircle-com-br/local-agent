@@ -6,6 +6,7 @@ import (
 	"os"
 	"time"
 
+	"github.com/digitalcircle-com-br/local-agent/lib/agent/tray"
 	"github.com/digitalcircle-com-br/local-agent/lib/common"
 	"github.com/gorilla/websocket"
 	"gopkg.in/yaml.v2"
@@ -16,6 +17,7 @@ type Config struct {
 	Apikey string
 	User   string
 	Cmds   map[string]string
+	Icon   string
 }
 
 var cfg *Config
@@ -35,9 +37,11 @@ func Init() error {
 	}
 	go Do()
 
-	for {
-		time.Sleep(time.Minute)
-	}
+	tray.Run()
+	// for {
+	// 	time.Sleep(time.Minute)
+	// }
+	return nil
 }
 
 func Once() {
@@ -47,6 +51,7 @@ func Once() {
 	w, _, err := websocket.DefaultDialer.Dial(cfg.Addr, header)
 	if err != nil {
 		log.Printf(err.Error())
+		return
 	}
 	m := common.CmdReq{}
 	err = w.ReadJSON(&m)
