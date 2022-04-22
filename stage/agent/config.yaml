@@ -3,6 +3,7 @@ user: paulo
 apikey: AA1234
 cmds:
   a: ["@open", "https://www.google.com/search?REQID=${REQID}&user=${USER}&q=${P0}"]
+  call: ["@open","http://localhost:8080/call.html"]
   b: ["ls", "-larth"]
 
 title: Agent (TITLE)

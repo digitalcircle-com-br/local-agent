@@ -93,7 +93,9 @@ func Run() error {
 		defer waits.Rem(id)
 		m.ReqID = id
 		err = conn.WriteJSON(m)
-		
+
+		log.Printf("Calling dowait w id: %s", id)
+
 		if err != nil {
 			http.Error(w, err.Error(), http.StatusInternalServerError)
 		}

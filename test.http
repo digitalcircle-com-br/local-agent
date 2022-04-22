@@ -1,1 +1,13 @@
-GET http://localhost:8080/do?user=paulo&cmd=a&params=Digital+Circle
+GET http://localhost:8080/do?user=paulo&cmd=a&params=Daniel+Gerep
+
+###
+GET http://localhost:8080/dowait?user=paulo&cmd=call&params=Daniel+Gerep
+
+
+###
+POST http://localhost:8080/replywait?reqid=b2e67dff-07b8-4293-ab4d-2ca2fcab8eca
+
+{
+    "a":1,
+    "b":"asd"
+}
