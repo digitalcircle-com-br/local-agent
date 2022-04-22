@@ -33,23 +33,22 @@ func execCmd(in []string) {
 	}()
 }
 
-func replaceVar(in string) string {
+func replaceVar(in string, c *common.CmdReq) string {
 	ret := in
 	ret = strings.ReplaceAll(ret, "${USER}", config.Cfg.User)
+	ret = strings.ReplaceAll(ret, "${REQID}", c.ReqID)
 	for k, v := range config.Cfg.Vars {
 		ret = strings.ReplaceAll(ret, fmt.Sprintf("${%s}", k), v)
+	}
+	for i := range c.Params {
+		ret = strings.ReplaceAll(ret, fmt.Sprintf("${P%v}", i), c.Params[i])
 	}
 	return ret
 }
 func replaceVars(in []string, c *common.CmdReq) []string {
 	ret := make([]string, len(in))
 	for i := range in {
-		ret[i] = replaceVar(in[i])
-	}
-	for i := range c.Params {
-		for j := range ret {
-			ret[j] = strings.ReplaceAll(ret[j], fmt.Sprintf("${P%v}", i), c.Params[i])
-		}
+		ret[i] = replaceVar(in[i], c)
 	}
 	return ret
 }

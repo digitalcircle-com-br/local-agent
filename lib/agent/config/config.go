@@ -20,6 +20,7 @@ var Cfg = &struct {
 }{}
 
 func Load() error {
+
 	_, err := os.Stat("config.yaml")
 
 	log.SetOutput(&lumberjack.Logger{
@@ -47,6 +48,9 @@ func Load() error {
 
 	if Cfg.Icon != "" {
 		Cfg.IconData, err = os.ReadFile(Cfg.Icon)
+		if err != nil {
+			log.Printf("Error reading icon: %s", err)
+		}
 	}
 
 	return nil

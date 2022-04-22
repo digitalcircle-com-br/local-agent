@@ -1,0 +1,22 @@
+@startuml
+
+title Sequence between 3CX, LAServer, LAgent
+group Agent Connection
+    USER -> LAgent: Opens LAgent
+    LAgent -> LAServer: Connects and awaits for Cmds
+end
+
+group 3CX Call
+    USER -> 3CX: Trigger Call
+    3CX -> LAServer: call /dowait
+    LAServer -> LAgent: trigger command
+    LAgent -> Browser: open screen / pass URL and ReqID
+    Browser -> LAServer: Request Page
+    LAServer --> Browser: Return Page
+    Browser -> User: Present Screen
+    User -> Screen: fill in data
+    Screen --> LAServer: Return data
+    LAServer --> 3CX: Return data
+    3CX -> TELECOM: Makes Call
+end
+@enduml

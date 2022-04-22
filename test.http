@@ -1,1 +1,1 @@
-GET http://localhost:8080/do?user=paulo&cmd=a&params=nian+cat
+GET http://localhost:8080/do?user=paulo&cmd=a&params=Digital+Circle
